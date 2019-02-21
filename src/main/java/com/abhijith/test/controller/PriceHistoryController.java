@@ -4,10 +4,12 @@ import com.abhijith.test.dao.PriceHistoryDAO;
 import com.abhijith.test.helper.BestBetCalculator;
 import com.abhijith.test.entity.PriceHistory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,20 +21,20 @@ public class PriceHistoryController {
     @Autowired
     private PriceHistoryDAO dao;
 
-    @RequestMapping(value="/priceHistory/{date}", method= RequestMethod.GET)
+    @GetMapping(value="/priceHistory/{date}")
     public @ResponseBody
     List<PriceHistory> findByDate(@PathVariable String date) {
         return dao.findByDate(date);
     }
 
-    @RequestMapping(value="/priceHistory/add", method=RequestMethod.POST, headers="Accept=application/json")
-    public @ResponseBody String addCatalogEntry(@RequestBody List<PriceHistory> priceHistories) {
-
+    @PostMapping(value="/priceHistory/add", headers="Accept=application/json")
+    public @ResponseBody
+    ResponseEntity addCatalogEntry(@RequestBody List<PriceHistory> priceHistories) {
         dao.save(priceHistories);
-        return "success";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/priceHistory/{date}/bestbet", method=RequestMethod.GET)
+    @GetMapping(value = "/priceHistory/{date}/bestbet")
     public void bestbet(@PathVariable String date) {
         List<PriceHistory> histories = dao.findByDate(date);
         BestBetCalculator.find(histories);
