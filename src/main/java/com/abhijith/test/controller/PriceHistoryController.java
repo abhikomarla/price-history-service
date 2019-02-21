@@ -1,6 +1,7 @@
 package com.abhijith.test.controller;
 
 import com.abhijith.test.dao.PriceHistoryDAO;
+import com.abhijith.test.entity.ResponseElement;
 import com.abhijith.test.helper.BestBetCalculator;
 import com.abhijith.test.entity.PriceHistory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class PriceHistoryController {
     }
 
     @GetMapping(value = "/priceHistory/{date}/bestbet")
-    public void bestbet(@PathVariable String date) {
+    public List<ResponseElement> bestbet(@PathVariable String date) {
         List<PriceHistory> histories = dao.findByDate(date);
-        BestBetCalculator.find(histories);
+        return BestBetCalculator.find(histories);
     }
 
 }
