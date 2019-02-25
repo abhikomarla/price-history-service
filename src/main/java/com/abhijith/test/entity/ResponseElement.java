@@ -9,9 +9,9 @@ public class ResponseElement implements Serializable {
 
     private String exchangeDate;
 
-    private BigDecimal minimumPrice;
+    private String purchaseTime;
 
-    private BigDecimal maximumPrice;
+    private String sellTime;
 
     private BigDecimal profit;
 
@@ -19,7 +19,7 @@ public class ResponseElement implements Serializable {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final String currency) {
         this.currency = currency;
     }
 
@@ -27,31 +27,31 @@ public class ResponseElement implements Serializable {
         return exchangeDate;
     }
 
-    public void setExchangeDate(String exchangeDate) {
+    public void setExchangeDate(final String exchangeDate) {
         this.exchangeDate = exchangeDate;
     }
 
-    public BigDecimal getMinimumPrice() {
-        return minimumPrice;
+    public String getPurchaseTime() {
+        return purchaseTime;
     }
 
-    public void setMinimumPrice(BigDecimal minimumPrice) {
-        this.minimumPrice = minimumPrice;
+    public void setPurchaseTime(final String purchaseTime) {
+        this.purchaseTime = purchaseTime;
     }
 
-    public BigDecimal getMaximumPrice() {
-        return maximumPrice;
+    public String getSellTime() {
+        return sellTime;
     }
 
-    public void setMaximumPrice(BigDecimal maximumPrice) {
-        this.maximumPrice = maximumPrice;
+    public void setSellTime(final String sellTime) {
+        this.sellTime = sellTime;
     }
 
     public BigDecimal getProfit() {
         return profit;
     }
 
-    public void setProfit(BigDecimal profit) {
+    public void setProfit(final BigDecimal profit) {
         this.profit = profit;
     }
 }

@@ -16,7 +16,7 @@ public class PriceHistoryDAO {
     @Autowired
     private DynamoDBMapper mapper;
 
-    public List<PriceHistory> findByDate(String date) {
+    public List<PriceHistory> findByDate(final String date) {
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":v1", new AttributeValue().withS(date));
 
@@ -27,7 +27,7 @@ public class PriceHistoryDAO {
         return mapper.scan(PriceHistory.class, scanExpression);
     }
 
-    public void save(List<PriceHistory> histories) {
+    public void save(final List<PriceHistory> histories) {
         for (PriceHistory history : histories) {
             mapper.save(history);
         }
