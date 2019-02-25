@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 
 public class ResponseElement implements Serializable {
 
+    public ResponseElement() {
+        this.profit = new BigDecimal(0);
+    }
+
     private String currency;
 
     private String exchangeDate;

@@ -29,7 +29,7 @@ public class PriceHistoryController {
     }
 
     @PostMapping(value = "/priceHistory/add", headers = "Accept=application/json")
-    public ResponseEntity addCatalogEntry(@RequestBody final List<PriceHistory> priceHistories) {
+    public ResponseEntity addEntry(@RequestBody final List<PriceHistory> priceHistories) {
         dao.save(priceHistories);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -42,6 +42,7 @@ public class PriceHistoryController {
         if (null == histories || histories.size() <= MINIMUM_REQUIRED_ENTRIES) {
             responseObject.setStatus(HttpStatus.BAD_REQUEST);
             responseObject.setStatusDescription("Not enough data for the day");
+            System.out.println("Not enough data for the day");
         } else {
             try {
                 List<ResponseElement> response = BestBetCalculator.find(histories);

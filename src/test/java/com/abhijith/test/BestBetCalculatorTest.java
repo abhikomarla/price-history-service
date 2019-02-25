@@ -205,5 +205,18 @@ public class BestBetCalculatorTest {
         assertEquals(61, response.get(0).getProfit().doubleValue(),0.1);
     }
 
+    @Test
+    public void test_scenario8() {
+        List<PriceHistory> input = new ArrayList<>();
 
+        PriceHistory price1 = new PriceHistory("BTC", "20180507",
+                "0915", new BigDecimal(6));
+        input.add(price1);
+        PriceHistory price2 = new PriceHistory("BTC", "20180507",
+                "1045", new BigDecimal(36));
+        input.add(price2);
+
+        List<ResponseElement> response = BestBetCalculator.find(input);
+        assertEquals(30, response.get(0).getProfit().doubleValue(),0.1);
+    }
 }
